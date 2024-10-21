@@ -15,20 +15,16 @@
 	<key>STORAGE_BUCKET</key>
 	<string>calmpath-90532.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
-	<false></false>
+	<false/>
 	<key>IS_ANALYTICS_ENABLED</key>
-	<false></false>
+	<false/>
 	<key>IS_APPINVITE_ENABLED</key>
-	<true></true>
+	<true/>
 	<key>IS_GCM_ENABLED</key>
-	<true></true>
+	<true/>
 	<key>IS_SIGNIN_ENABLED</key>
-	<true></true>
+	<true/>
 	<key>GOOGLE_APP_ID</key>
 	<string>1:805003199628:ios:8a553a7c39627f508527a9</string>
-	<key>UIAppFonts</key>
-	<array>
-		<string>Gilroy-Bold.ttf</string>
-	</array>
 </dict>
 </plist>

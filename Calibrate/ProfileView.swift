@@ -19,7 +19,7 @@ struct ProfileView: View {
                 HStack(spacing: 15) {
                     StatCard(title: "Check-Ins", value: "\(authViewModel.user?.checkInCount ?? 0)", iconName: "checkins")
                     StatCard(title: "Habits", value: "4", iconName: "alcohol")
-                    StatCard(title: "Streak", value: "\(authViewModel.user?.currentStreak ?? 0)", iconName: "fire")
+                    StatCard(title: "Anxiety Lvl", value: "\(authViewModel.user?.currentStreak ?? 0)", iconName: "anxietylvl")
                 }
                 .padding(.horizontal)
                 
@@ -29,7 +29,6 @@ struct ProfileView: View {
                 // Recent Check-Ins
                 recentCheckInsSection
                 
-                // Habits
                 habitsSection
                 
                 // Sign Out Button
@@ -83,10 +82,11 @@ struct ProfileView: View {
                     }
                     isEditing.toggle()
                 }) {
-                    Image(systemName: isEditing ? "checkmark.circle.fill" : "pencil.circle.fill")
+                    Image(systemName: isEditing ? "checkmark.circle.fill" : "square.and.pencil")
+//                    Image(.squarePencil)
                         .resizable()
                         .frame(width: 24, height: 24)
-                        .foregroundColor(.blue)
+                        .foregroundColor(.black)
                 }
             }
             
@@ -212,7 +212,7 @@ struct StatCard: View {
                         .stroke(Color(red: 0.89, green: 0.89, blue: 0.89), lineWidth: 0.5)
                 )
             
-            VStack(spacing: 5) {
+            VStack(alignment: .leading,spacing: 5) {
                 Image(iconName)
                     .resizable()
                     .scaledToFit()
@@ -221,11 +221,14 @@ struct StatCard: View {
                 Text(title)
                     .font(.custom("DM Sans", size: 13))
                     .foregroundColor(Color(red: 0.28, green: 0.28, blue: 0.28).opacity(0.70))
+                    .padding(.top, 19)
                 
                 Text(value)
                     .font(.custom("Gilroy-Bold", size: 16))
                     .foregroundColor(Color(red: 0.02, green: 0.02, blue: 0.08))
             }
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .padding(.horizontal, 13)
         }
     }
 }

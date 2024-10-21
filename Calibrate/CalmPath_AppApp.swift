@@ -13,6 +13,13 @@ struct CalmPath_AppApp: App {
         WindowGroup {
             RootView()
                 .environmentObject(authViewModel)
+                .onAppear {
+                    for family in UIFont.familyNames {
+                        for font in UIFont.fontNames(forFamilyName: family) {
+                            print("Font: \(font)")
+                        }
+                    }
+                }
         }
     }
 }
