@@ -2,7 +2,7 @@ import SwiftUI
 import Charts
 import Firebase
 import FirebaseFirestore
-import Calibrate // Add this line to import the module containing Habit
+//import Calibrate // Add this line to import the module containing Habit
 
 // Update the AnxietyDataPoint struct
 struct AnxietyDataPoint: Identifiable {
@@ -544,10 +544,10 @@ struct CenteredProgressBar: View {
         .frame(height: 27)
     }
 }
-
-struct DashboardView_Previews: PreviewProvider {
-    static var previews: some View {
-        DashboardView(selectedTab: .constant(0))
-            .environmentObject(AuthViewModel())
-    }
-}
+//
+//struct DashboardView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        DashboardView(selectedTab: .constant(0))
+//            .environmentObject(AuthViewModel())
+//    }
+//}

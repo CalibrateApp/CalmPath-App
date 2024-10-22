@@ -9,26 +9,26 @@ struct ContentView: View {
         if authViewModel.isAuthenticated {
             if showDashboard {
                 TabView(selection: $selectedTab) {
-                    DashboardView(selectedTab: $selectedTab)
-                        .tabItem {
-                            Image(systemName: "house")
-                            Text("Dashboard")
-                        }
-                        .tag(0)
-                    
-                    TopRatedView(selectedTab: $selectedTab)
-                        .tabItem {
-                            Image(systemName: "star")
-                            Text("Top Rated")
-                        }
-                        .tag(1)
-                    
-                    ProfileView(authViewModel: authViewModel)
-                        .tabItem {
-                            Image(systemName: "person")
-                            Text("Profile")
-                        }
-                        .tag(2)
+//                    DashboardView(selectedTab: $selectedTab)
+//                        .tabItem {
+//                            Image(systemName: "house")
+//                            Text("Dashboard")
+//                        }
+//                        .tag(0)
+//                    
+//                    TopRatedView(selectedTab: $selectedTab)
+//                        .tabItem {
+//                            Image(systemName: "star")
+//                            Text("Top Rated")
+//                        }
+//                        .tag(1)
+//                    
+//                    ProfileView(authViewModel: authViewModel)
+//                        .tabItem {
+//                            Image(systemName: "person")
+//                            Text("Profile")
+//                        }
+//                        .tag(2)
                 }
                 .environmentObject(authViewModel)
             } else {

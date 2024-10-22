@@ -103,13 +103,14 @@ struct TopRatedView: View {
     
     var body: some View {
         NavigationView {
-            VStack(alignment: .leading, spacing: 16) {
-                Text("Top Rated Anxiety Busters")
-                    .font(.system(size: 22, weight: .bold))
-                    .padding(.horizontal)
+            VStack(alignment: .leading) {
+                Text("Top-Rated for Community")
+                    .font(.Gilroy(weight: .bold, size: 24))                    .padding(.horizontal)
                 
                 SearchBar(text: $searchText)
                     .padding(.horizontal)
+                    .padding(.top, 15)
+                    .padding(.bottom, 19)
                 
                 ScrollView(.horizontal, showsIndicators: false) {
                     HStack(spacing: 10) {
@@ -120,6 +121,7 @@ struct TopRatedView: View {
                         }
                     }
                     .padding(.horizontal)
+                    .padding(.bottom, 7)
                 }
                 
                 if viewModel.techniques.isEmpty {
@@ -127,12 +129,12 @@ struct TopRatedView: View {
                         .foregroundColor(.red)
                         .padding()
                 } else {
-                    List {
+                    ScrollView {
                         ForEach(filteredTechniques) { technique in
                             TechniqueRow(technique: technique)
                         }
+                        .padding(.top, 12)
                     }
-                    .listStyle(PlainListStyle())
                 }
             }
             .navigationBarHidden(true)
@@ -185,42 +187,42 @@ struct TechniqueRow: View {
     let technique: Technique
     
     var body: some View {
-        ZStack(alignment: .leading) {
-            Rectangle()
-                .foregroundColor(.clear)
-                .frame(height: 71)
-                .background(.white)
-                .cornerRadius(10)
-                .shadow(color: Color(red: 0, green: 0, blue: 0, opacity: 0.03), radius: 30, x: 10, y: 10)
+
+        
+        HStack {
+            Image(technique.imageURL)
+                .resizable()
+                .aspectRatio(contentMode: .fill)
+                .frame(width: 53, height: 53)
+                .clipShape(.rect(cornerRadius: 8))
+                .padding(9)
             
-            HStack(spacing: 15) {
-                Image(technique.imageURL)
-                    .resizable()
-                    .aspectRatio(contentMode: .fill)
-                    .frame(width: 53, height: 53)
-                    .cornerRadius(8)
+            VStack(alignment: .leading, spacing: 4) {
+                Text(technique.name)
+                    .font(.DMSans(weight: .medium, size: 13))
+                    .foregroundColor(.black)
                 
-                VStack(alignment: .leading, spacing: 4) {
-                    Text(technique.name)
-                        .font(Font.custom("DM Sans", size: 13).weight(.medium))
-                        .foregroundColor(.black)
-                    
-                    Text(technique.description)
-                        .font(Font.custom("DM Sans", size: 12))
-                        .foregroundColor(Color(red: 0.28, green: 0.28, blue: 0.28).opacity(0.60))
-                }
-                
-                Spacer()
-                
-                HStack(spacing: 8) {
-                    VoteView(count: technique.upvotes, isUpvote: true)
-                    VoteView(count: technique.downvotes, isUpvote: false)
-                }
+                Text(technique.description)
+                    .font(.DMSans(weight: .regular, size: 12))
+                    .foregroundStyle(.colorGray).opacity(0.6)
             }
-            .padding(.horizontal, 15)
+            .padding(.trailing, 5)
+            
+            
+            
+            Spacer()
+            
+            HStack(spacing: 17) {
+                VoteView(count: technique.upvotes, isUpvote: true)
+                VoteView(count: technique.downvotes, isUpvote: false)
+            }
+            .padding(.trailing, 27)
         }
-        .frame(height: 71)
-        .padding(.vertical, 5)
+        .background(RoundedRectangle(cornerRadius: 10))
+        .foregroundStyle(.white)
+        .shadow(color: .black.opacity(0.13), radius: 14, x: 10, y: 10)
+        .frame(maxWidth: .infinity)
+        .padding(.horizontal, 15)
     }
 }
 
