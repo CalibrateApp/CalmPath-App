@@ -242,7 +242,7 @@ struct DashboardView: View {
                 VStack(spacing: 0) {
                     // Blue background
                     Rectangle()
-                        .fill(Color(red: 0.23, green: 0.62, blue: 0.90))
+                        .foregroundStyle(.appBlue)
                         .frame(height: 213)
                         .ignoresSafeArea(edges: .top)
                         .overlay(
@@ -280,7 +280,7 @@ struct DashboardView: View {
                         // Daily Check-in Card
                         DailyCheckInCard(showingDailyCheckIn: $showingDailyCheckIn)
                             .frame(width: min(geometry.size.width * 0.9, 400))
-                            .offset(y: -85)
+                            .offset(y: -70)
                         
                         // Habit Insights
                         HabitInsightsCard(habits: checkInViewModel.habits)
@@ -477,7 +477,7 @@ struct HabitInsightsCard: View {
     
     var body: some View {
         VStack(alignment: .leading, spacing: 15) {
-            Text("Habit Insights")
+            Text("Habit Insights") 
                 .font(.custom("Gilroy-Bold", size: 16))
                 .foregroundColor(Color(red: 0.02, green: 0.02, blue: 0.08))
                 .padding(.bottom, 5)
@@ -507,14 +507,15 @@ struct HabitRow: View {
                 .frame(width: 120, alignment: .leading)
             
             Spacer()
-            
-            CenteredProgressBar(progress: progress, isPositive: isPositive)
-                .frame(width: 160)
-        }
-        .frame(height: 27)
-    }
-}
 
+
+                    CenteredProgressBar(progress: progress, isPositive: isPositive)
+                        .frame(width: 160)
+                }
+                .frame(height: 27)
+            }
+        }
+        
 struct CenteredProgressBar: View {
     let progress: Double
     let isPositive: Bool
@@ -544,10 +545,10 @@ struct CenteredProgressBar: View {
         .frame(height: 27)
     }
 }
-//
-//struct DashboardView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        DashboardView(selectedTab: .constant(0))
-//            .environmentObject(AuthViewModel())
-//    }
-//}
+
+struct DashboardView_Previews: PreviewProvider {
+    static var previews: some View {
+        DashboardView(selectedTab: .constant(0))
+            .environmentObject(AuthViewModel())
+    }
+}

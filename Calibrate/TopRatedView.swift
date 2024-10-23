@@ -105,7 +105,8 @@ struct TopRatedView: View {
         NavigationView {
             VStack(alignment: .leading) {
                 Text("Top-Rated for Community")
-                    .font(.Gilroy(weight: .bold, size: 24))                    .padding(.horizontal)
+                    .font(.Gilroy(weight: .bold, size: 24))
+                    .padding(.horizontal)
                 
                 SearchBar(text: $searchText)
                     .padding(.horizontal)
@@ -121,7 +122,6 @@ struct TopRatedView: View {
                         }
                     }
                     .padding(.horizontal)
-                    .padding(.bottom, 7)
                 }
                 
                 if viewModel.techniques.isEmpty {
@@ -133,8 +133,10 @@ struct TopRatedView: View {
                         ForEach(filteredTechniques) { technique in
                             TechniqueRow(technique: technique)
                         }
-                        .padding(.top, 12)
+                        .padding(.top, 19)
+                        .padding(.bottom, 12)
                     }
+                    .padding(.bottom, 65)
                 }
             }
             .navigationBarHidden(true)
@@ -176,7 +178,7 @@ struct CategoryButton: View {
             Text(title)
                 .padding(.horizontal, 16)
                 .padding(.vertical, 8)
-                .background(isActive ? Color.black : Color.gray.opacity(0.2))
+                .background(isActive ? Color.black : Color.appWhite)
                 .foregroundColor(isActive ? .white : .black)
                 .cornerRadius(20)
         }
@@ -204,7 +206,7 @@ struct TechniqueRow: View {
                 
                 Text(technique.description)
                     .font(.DMSans(weight: .regular, size: 12))
-                    .foregroundStyle(.colorGray).opacity(0.6)
+                    .foregroundStyle(.appGray2).opacity(0.6)
             }
             .padding(.trailing, 5)
             
@@ -220,7 +222,7 @@ struct TechniqueRow: View {
         }
         .background(RoundedRectangle(cornerRadius: 10))
         .foregroundStyle(.white)
-        .shadow(color: .black.opacity(0.13), radius: 14, x: 10, y: 10)
+        .shadow(color: .black.opacity(0.1), radius: 14, x: 10, y: 0)
         .frame(maxWidth: .infinity)
         .padding(.horizontal, 15)
     }

@@ -65,9 +65,10 @@ struct DailyCheckInView: View {
                     .padding(.bottom, 27)
                 
                 Slider(value: $anxietyLevel, in: 0...1, step: 0.01)
+                    .tint(.appBlue)
                 
                 Text("Moderately Anxious")
-                    .foregroundStyle(.darkGray)
+                    .foregroundStyle(.appGray3)
                     .font(.DMSans(weight: .medium, size: 13))
                     .frame(maxWidth: .infinity, alignment: .center)
                     .padding(.bottom, 39)
@@ -112,7 +113,7 @@ struct DailyCheckInView: View {
                 Button(action: saveCheckIn) {
                     Text("Submit")
                         .font(.DMSans(weight: .bold, size: 14))
-                        .foregroundColor(.colorWhite)
+                        .foregroundColor(.appWhite2)
                         .frame(maxWidth: .infinity)
                         .padding()
                         .background(Color.appBlue)
@@ -225,9 +226,8 @@ struct optionButton: View {
                 Text(emoji)
 
                 Text(title)
-                    .foregroundStyle(isSelected ? Color.colorWhite : Color.black)
+                    .foregroundStyle(isSelected ? Color.appWhite2 : Color.black)
                     .font(.DMSans(weight: .medium, size: 13))
-//                    .textCase(nil)
 
             }
             .padding(.vertical, 10)

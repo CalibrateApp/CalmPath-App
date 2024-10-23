@@ -84,14 +84,14 @@ struct customCard: View {
             
             Text(time)
                 .font(.DMSans(weight: .regular, size: 12))
-                .foregroundStyle(.colorGray)
+                .foregroundStyle(.appGray2)
                 .padding(.horizontal, 11)
                 .padding(.bottom, 14)
             
         }
         .frame(width: columnWidth)
         .background(RoundedRectangle(cornerRadius: 10)
-            .foregroundStyle(.colorWhite))
+            .foregroundStyle(.appWhite2))
         .shadow(radius: 0.3)
     }
     

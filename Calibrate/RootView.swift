@@ -1,39 +1,41 @@
 import SwiftUI
 
 struct RootView: View {
+    
     @EnvironmentObject var authViewModel: AuthViewModel
+    
     @State private var selectedTab = 0
+    
+    @State var selectedOption: Int? = nil
 
     var body: some View {
         if authViewModel.isAuthenticated {
-            TabView(selection: $selectedTab) {
-                DashboardView(selectedTab: $selectedTab)
-                    .tabItem {
-                        Image(systemName: "house")
-                        Text("Dashboard")
-                    }
-                    .tag(0)
+            
+            GeometryReader { reader in
                 
-                TopRatedView(selectedTab: $selectedTab)
-                    .tabItem {
-                        Image(systemName: "star")
-                        Text("Top Rated")
+                ZStack(alignment: .bottom) {
+                    
+                    TabView(selection: $selectedTab) {
+                        DashboardView(selectedTab: $selectedTab)
+                            .toolbar(.hidden, for: .tabBar)
+                            .tag(0)
+                        
+                        TopRatedView(selectedTab: $selectedTab)
+                            .toolbar(.hidden, for: .tabBar)
+                            .tag(1)
+                        
+                        LearningView()
+                            .toolbar(.hidden, for: .tabBar)
+                            .tag(2)
+                        
+                        ProfileView(authViewModel: authViewModel)
+                            .toolbar(.hidden, for: .tabBar)
+                            .tag(3)
                     }
-                    .tag(1)
-                
-                LearningView()
-                    .tabItem {
-                        Image(systemName: "book")
-                        Text("Learning")
-                    }
-                    .tag(2)
-                
-                ProfileView(authViewModel: authViewModel)
-                    .tabItem {
-                        Image(systemName: "person")
-                        Text("Profile")
-                    }
-                    .tag(3)
+                    
+                    CustomTabBar(selectedTab: $selectedTab, height: 65 + reader.safeAreaInsets.bottom)
+                }
+                .ignoresSafeArea()
             }
         } else {
             LoginView()

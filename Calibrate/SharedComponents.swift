@@ -1,7 +1,7 @@
-//import SwiftUI
-//
+import SwiftUI
+
 //struct BottomNavigation: View {
-//    @Binding var selectedTab: Int
+//     var selectedTab: Bool
 //
 //    var body: some View {
 //        HStack(spacing: 0) {
@@ -25,23 +25,23 @@
 //        .edgesIgnoringSafeArea(.bottom)
 //    }
 //}
-//
-//struct NavButton: View {
-//    let icon: String
-//    let title: String
-//    let isSelected: Bool
-//    let action: () -> Void
-//
-//    var body: some View {
-//        Button(action: action) {
-//            VStack {
-//                Image(systemName: icon)
-//                    .foregroundColor(isSelected ? .red : .yellow)
-//                Text(title)
-//                    .font(.caption)
-//                    .foregroundColor(isSelected ? .blue : .gray)
-//            }
-//        }
-//        .frame(maxWidth: .infinity)
-//    }
-//}
+
+struct NavButton: View {
+    let icon: String
+    var isSelected: Bool
+    let action: () -> Void
+
+    var body: some View {
+        Button(action: action) {
+            VStack {
+                Image(systemName: icon)
+                    .tint(isSelected ? .black : .blue)
+                Circle()
+                    .fill(isSelected ? .black : .clear)
+                    .frame(width: 4, height: 4)
+                    .padding(.top, 4)
+            }
+        }
+        .frame(maxWidth: .infinity)
+    }
+}
