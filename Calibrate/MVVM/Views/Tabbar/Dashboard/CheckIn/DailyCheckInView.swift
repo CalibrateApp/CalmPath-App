@@ -13,18 +13,21 @@ struct DailyCheckInView: View {
     @State var followedDiet: Bool = false
     @State var didMeditation: Bool = false
     @State var hadColdShower: Bool = false
+    
+    @FocusState var isFocused: Bool
 
     var body: some View {
         NavigationView {
             ScrollView {
-            VStack(alignment: .leading) {
+                VStack(alignment: .leading, spacing: 0) {
                 Text("Take 5mn to complete your daily check-in")
                     .font(.DMSans(weight: .regular, size: 14))
+                    .foregroundStyle(.black.opacity(0.65))
                     .padding(.top, 7)
                     .padding(.bottom, 22)
                 
                 Text("What did you consume yesterday?")
-                    .foregroundStyle(.black)
+                    .foregroundStyle(.appBlack)
                     .font(.Gilroy(weight: .bold, size: 15))
                     .padding(.bottom, 8)
                 
@@ -59,13 +62,16 @@ struct DailyCheckInView: View {
                     
                 }
                 
-                Text("Anxiety Levels")
-                    .font(.Gilroy(weight: .bold, size: 15))
-                    .padding(.top, 39)
-                    .padding(.bottom, 27)
-                
-                Slider(value: $anxietyLevel, in: 0...1, step: 0.01)
-                    .tint(.appBlue)
+                    VStack(alignment: .leading, spacing: 20) {
+                        
+                        Text("Anxiety Levels")
+                            .font(.Gilroy(weight: .bold, size: 15))
+                            .padding(.top, 39)
+                        
+                        Slider(value: $anxietyLevel, in: 0...1, step: 0.01)
+                            .tint(.appBlue)
+                            .padding(.bottom, 15)
+                    }
                 
                 Text("Moderately Anxious")
                     .foregroundStyle(.appGray3)
@@ -94,17 +100,20 @@ struct DailyCheckInView: View {
                         .stroke(Color.gray)
                         .frame(height: 88)
                     
-                    HStack(alignment: .top ,spacing: 9) {
-                        Image(.message)
-                        
-                        Text("What's on your mind?")
-                            .font(.DMSans(weight: .regular, size: 14))
+                    if !isFocused {
+                        HStack(alignment: .top ,spacing: 9) {
+                            Image(.message)
+                            
+                            Text("What's on your mind?")
+                                .font(.DMSans(weight: .regular, size: 14))
+                        }
+                        .padding(.leading, 18)
+                        .padding(.bottom, 50)
+                        .frame(maxWidth: .infinity, alignment: .leading)
                     }
-                    .padding(.leading, 18)
-                    .padding(.bottom, 50)
-                    .frame(maxWidth: .infinity, alignment: .leading)
                     
                     TextEditor(text: $notes)
+                        .focused($isFocused)
                         .clipShape(RoundedRectangle(cornerRadius: 10))
                         .frame(height: 88)
                         .opacity(0.5)
@@ -113,7 +122,7 @@ struct DailyCheckInView: View {
                 Button(action: saveCheckIn) {
                     Text("Submit")
                         .font(.DMSans(weight: .bold, size: 14))
-                        .foregroundColor(.appWhite2)
+                        .foregroundColor(.white)
                         .frame(maxWidth: .infinity)
                         .padding()
                         .background(Color.appBlue)
@@ -124,7 +133,21 @@ struct DailyCheckInView: View {
             }
             .padding(.horizontal, 15)
 
-        }
+            }
+            .onTapGesture {
+                self.isFocused = false
+            }
+            .scrollDismissesKeyboard(.interactively)
+            .toolbar(content: {
+                ToolbarItem(placement: .keyboard) {
+                    HStack {
+                        Spacer()
+                        Button("Done") {
+                            self.isFocused = false
+                        }
+                    }
+                }
+            })
             .navigationBarItems(leading: Text("Check-In").font(.Gilroy(weight: .bold, size:22)))
             
             .navigationBarItems(leading: Button(action: {
@@ -226,8 +249,8 @@ struct optionButton: View {
                 Text(emoji)
 
                 Text(title)
-                    .foregroundStyle(isSelected ? Color.appWhite2 : Color.black)
-                    .font(.DMSans(weight: .medium, size: 13))
+                    .foregroundStyle(isSelected ? Color.white : Color.black)
+                    .font(isSelected ? .DMSans(weight: .bold, size: 13) : .DMSans(weight: .medium, size: 13))
 
             }
             .padding(.vertical, 10)

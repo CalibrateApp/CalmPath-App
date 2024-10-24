@@ -10,14 +10,17 @@ struct LearningView: View {
     ]
     var body: some View {
         VStack(alignment: .leading) {
+            
             Text("Learning")
                 .font(.Gilroy(weight: .bold, size: 22))
+                .padding(.top, 29)
             
             customTextField(text: $text)
-                            .padding(.top, 16)
+                .padding(.top, 15)
             
             ScrollView {
                 VStack(alignment: .leading) {
+                    
                     Text("Understanding Anxiety")
                         .padding(.top, 23)
                         .padding(.bottom, 8)
@@ -25,27 +28,29 @@ struct LearningView: View {
                     
                     LazyVGrid(columns: columns) {
                         
-                        customCard(icon: .tension, text: "What is Anxiety?", time: "12m")
+                        LearningCard(icon: .tension, text: "What is Anxiety?", time: "12m")
                         
-                        customCard(icon: .causes, text: "Causes and Triggers", time: "12m")
+                        LearningCard(icon: .causes, text: "Causes and Triggers", time: "12m")
                         
-                        customCard(icon: .disorder, text: "Anxiety Disorders", time: "12m")
+                        LearningCard(icon: .disorder, text: "Anxiety Disorders", time: "12m")
                         
-                        customCard(icon: .effects, text: "Effects on the body", time: "12m")
+                        LearningCard(icon: .effects, text: "Effects on the body", time: "12m")
                         
                     }
                     Text("Breathing Techniques")
                         .font(.Gilroy(weight: .bold, size: 16))
                         .padding(.top, 33)
                         .padding(.bottom, 8)
+                        
                     
                     LazyVGrid(columns: columns) {
                         
-                        customCard(icon: .breathing, text: "Breathing", time: "12m")
+                        LearningCard(icon: .breathing, text: "Breathing", time: "12m")
                         
-                        customCard(icon: .exercise, text: "Exercise", time: "12m")
+                        LearningCard(icon: .exercise, text: "Exercise", time: "12m")
                     }
                 }
+                .padding(.bottom, 75)
             }
         }
         .padding(.horizontal, 15)
@@ -59,7 +64,7 @@ struct LearningView_Previews: PreviewProvider {
 }
 
 
-struct customCard: View {
+struct LearningCard: View {
     
     let icon: ImageResource
     let text: String
@@ -90,12 +95,14 @@ struct customCard: View {
             
         }
         .frame(width: columnWidth)
-        .background(RoundedRectangle(cornerRadius: 10)
-            .foregroundStyle(.appWhite2))
-        .shadow(radius: 0.3)
+        .background{
+            RoundedRectangle(cornerRadius: 10)
+                .foregroundStyle(.white)
+                .shadow(color: .black.opacity(0.1) ,radius: 15)
+        }
     }
-    
 }
+
 struct customTextField: View {
     
     @Binding var text: String
@@ -105,12 +112,13 @@ struct customTextField: View {
             Image(systemName: "magnifyingglass")
                 .foregroundColor(.gray)
             TextField("Search", text: $text)
+                
         }
         .frame(maxWidth: .infinity)
         .frame(height: 50)
-        .padding(8)
-        .background(Color(.systemGray6))
-        .cornerRadius(10)
+        .padding(.horizontal, 15)
+        .background(Color.black.opacity(0.03))
+        .cornerRadius(11)
     }
   }
 

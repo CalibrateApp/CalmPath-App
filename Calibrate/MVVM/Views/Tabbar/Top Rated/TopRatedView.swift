@@ -107,11 +107,13 @@ struct TopRatedView: View {
                 Text("Top-Rated for Community")
                     .font(.Gilroy(weight: .bold, size: 24))
                     .padding(.horizontal)
+                    .padding(.top, 29)
                 
-                SearchBar(text: $searchText)
-                    .padding(.horizontal)
+                customTextField(text: $searchText)
                     .padding(.top, 15)
-                    .padding(.bottom, 19)
+                    .padding(.horizontal, 15)
+                    .padding(.bottom, 20)
+
                 
                 ScrollView(.horizontal, showsIndicators: false) {
                     HStack(spacing: 10) {
@@ -153,20 +155,7 @@ struct TopRatedView: View {
     }
 }
 
-struct SearchBar: View {
-    @Binding var text: String
-    
-    var body: some View {
-        HStack {
-            Image(systemName: "magnifyingglass")
-                .foregroundColor(.gray)
-            TextField("Search", text: $text)
-        }
-        .padding(8)
-        .background(Color(.systemGray6))
-        .cornerRadius(10)
-    }
-}
+
 
 struct CategoryButton: View {
     let title: String
@@ -176,6 +165,7 @@ struct CategoryButton: View {
     var body: some View {
         Button(action: action) {
             Text(title)
+                .font(isActive ? .DMSans(weight: .bold, size: 13 ) : .DMSans(weight: .medium, size: 13))
                 .padding(.horizontal, 16)
                 .padding(.vertical, 8)
                 .background(isActive ? Color.black : Color.appWhite)

@@ -42,9 +42,9 @@ struct ProfileView: View {
                         .background(Color.red)
                         .cornerRadius(8)
                 }
-                .padding(.horizontal)
             }
-            .padding()
+            .padding(.bottom, 80)
+            .padding(.horizontal)
         }
         .navigationTitle("Profile")
         .sheet(isPresented: $showImagePicker) {
@@ -82,12 +82,21 @@ struct ProfileView: View {
                     }
                     isEditing.toggle()
                 }) {
-                    Image(systemName: isEditing ? "checkmark.circle.fill" : "square.and.pencil")
-//                    Image(.squarePencil)
-                        .resizable()
-                        .frame(width: 24, height: 24)
-                        .foregroundColor(.black)
+                    if isEditing {
+                        Image(systemName: "checkmark.circle.fill")
+                            .resizable()
+             
+
+                    }else {
+                        Image(.squarePencil)
+                            .resizable()
+                           
+                    }
                 }
+                .frame(width: 24, height: 24)
+                .foregroundColor(.black)
+                .padding(.trailing)
+                .padding(.leading, 78)
             }
             
             if let imageURL = authViewModel.user?.profileImageURL, let url = URL(string: imageURL) {
@@ -121,18 +130,19 @@ struct ProfileView: View {
                     .textFieldStyle(RoundedBorderTextFieldStyle())
             } else {
                 Text(userName)
-                    .font(.title)
+                    .font(.Gilroy(weight: .bold, size: 22))
+                    .padding(.top, 19)
                 Text(userBio)
-                    .font(.subheadline)
-                    .foregroundColor(.gray)
+                    .font(.DMSans(weight: .medium, size: 13))
+                    .foregroundColor(.appGray2.opacity(0.6))
             }
         }
     }
     
     private var achievementsSection: some View {
         VStack(alignment: .leading) {
-            Text("Achievements")
-                .font(.headline)
+            Text("Recent Achievements")
+                .font(.Gilroy(weight: .bold, size: 16))
                 .padding(.horizontal)
             
             ScrollView(.horizontal, showsIndicators: false) {
@@ -219,13 +229,13 @@ struct StatCard: View {
                     .frame(width: 23, height: 23)
                 
                 Text(title)
-                    .font(.custom("DM Sans", size: 13))
-                    .foregroundColor(Color(red: 0.28, green: 0.28, blue: 0.28).opacity(0.70))
+                    .font(.DMSans(weight: .regular, size: 13))
+                    .foregroundColor(Color.appGray2.opacity(0.7))
                     .padding(.top, 19)
                 
                 Text(value)
-                    .font(.custom("Gilroy-Bold", size: 16))
-                    .foregroundColor(Color(red: 0.02, green: 0.02, blue: 0.08))
+                    .font(.Gilroy(weight: .bold, size: 16))
+                    .foregroundColor(Color.appBlack)
             }
             .frame(maxWidth: .infinity, alignment: .leading)
             .padding(.horizontal, 13)
@@ -241,7 +251,7 @@ struct AchievementCard: View {
         VStack {
             ZStack {
                 Circle()
-                    .foregroundColor(Color(red: 0.96, green: 0.96, blue: 0.96))
+                    .foregroundColor(Color.appWhite)
                     .frame(width: 80, height: 80)
                 
                 Image(iconName)
@@ -251,8 +261,8 @@ struct AchievementCard: View {
             }
             
             Text(title)
-                .font(.custom("DM Sans", size: 13))
-                .foregroundColor(Color(red: 0.02, green: 0.02, blue: 0.08))
+                .font(.DMSans(weight: .regular, size: 13))
+                .foregroundColor(Color.appBlack)
                 .multilineTextAlignment(.center)
         }
         .frame(width: 93, height: 127)
